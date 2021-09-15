@@ -6,6 +6,7 @@ Luego de la asignación deberá imprimirse la información contenida en una tabl
 La tabla de particiones contendrá la siguiente información (id Proceso, dirección de comienzo de
 la partición asignada, tamaño de la partición).
 """
+#aca creamos la particion
 def Particion(nomb,cant):
     l=list()
     l=[None]*cant
@@ -13,52 +14,26 @@ def Particion(nomb,cant):
     a["nombre"] = nomb
     a["espacio"]=l
     return a
-#aca vamos a definir nuestra cantidad de memoria y hacer las particiones
+#funcion para juntar las particiones en una lista y la devolverla
 def CrearMemoria():
     m = list()  
-    m.append(Particion("SO",15))
-    m.append(Particion("Part1",10))
-    m.append(Particion("Part2",15))
-    m.append(Particion("Part3",25))
+    m.append(Particion("Sistema Operativo",150))
+    m.append(Particion("Particion 1",100))
+    m.append(Particion("Particion 2",150))
+    m.append(Particion("Particion 3",250))
     return m
 
-
 #aqui generaremos ls particiones para
-def GeneracionDeParticiones(memoriaLimpia):
-    try:
-        con=0
-        for i in range(700):
-            memoriaLimpia[i]["espacio"] = con
-            con=con+1
-            if i < 150:  #esto seri de 0..149
-                memoriaLimpia[i]["particion"] = 0
-            elif i < 250:   #150..249
-                memoriaLimpia[i]["particion"] = 1
-            elif i < 400:   #250..399
-                memoriaLimpia[i]["particion"] = 2
-            else:   #400..699
-                memoriaLimpia[i]["particion"] = 3
-    except:
-        print("ERROR DE TAMAÑO:el tamaño de memoria no es 700")
 
 def MostrarMemoriaActual(me):
-    c=0
-    for i in range(len(me)//10):
-
-        if i==0:
-            print("sistema operativo")
-        if i==15:
-            print("particion 1")
-        if i == 25:
-            print("particion 2")
-        if i == 40:
-            print("particion 3")
-
-        for j in range(10):
-            print(me[c]["espacio"], end=" ")
-            c=c+1
-        print()
-    print("--------------------------------------------------------------------------------")
+    for j in range(len(me)):
+        print("-------------------------------------------------------------------------------")
+        print("********",me[j]["nombre"],"********")
+        for t in range(len(me[j]["espacio"])//10):
+            for i in range(10):
+                print(me[j]["espacio"][t], end=" ")
+            print()
+    print("-------------------------------------------------------------------------------")
     print()
 
 
@@ -68,4 +43,4 @@ GeneracionDeParticiones(memoria)
 MostrarMemoriaActual(memoria)"""
 
 memori=CrearMemoria()
-print(memori)
+MostrarMemoriaActual(memori)
