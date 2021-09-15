@@ -1,0 +1,5 @@
+funcion para declarar las particiones que van a ser listas individuales
+la memoria sera una lista de las particiones
+modificar la funcion mostrar
+definir una funcion para cargar los procesos
+funcion para verificar y devolver el lugar donde entre el proceso

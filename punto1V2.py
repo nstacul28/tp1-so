@@ -6,16 +6,22 @@ Luego de la asignación deberá imprimirse la información contenida en una tabl
 La tabla de particiones contendrá la siguiente información (id Proceso, dirección de comienzo de
 la partición asignada, tamaño de la partición).
 """
-
+def Particion(nomb,cant):
+    l=list()
+    l=[None]*cant
+    a=dict()
+    a["nombre"] = nomb
+    a["espacio"]=l
+    return a
 #aca vamos a definir nuestra cantidad de memoria y hacer las particiones
-def CrearMemoria(num):
-    m = list()  #m va a simular nuestra memoria
-    for i in range(num):
-        a=dict()    #creamos un diccinario que va a ser como un registro
-        a["espacio"] = None
-        a["particion"] = None
-        m.append(a)     #agregamos a m el diccionario haciendo que cada elemnto de memoria tenga dicha estructura
+def CrearMemoria():
+    m = list()  
+    m.append(Particion("SO",15))
+    m.append(Particion("Part1",10))
+    m.append(Particion("Part2",15))
+    m.append(Particion("Part3",25))
     return m
+
 
 #aqui generaremos ls particiones para
 def GeneracionDeParticiones(memoriaLimpia):
@@ -52,9 +58,14 @@ def MostrarMemoriaActual(me):
             print(me[c]["espacio"], end=" ")
             c=c+1
         print()
+    print("--------------------------------------------------------------------------------")
+    print()
 
 
 
-memoria = CrearMemoria(700)
+"""memoria = CrearMemoria(700)
 GeneracionDeParticiones(memoria)
-MostrarMemoriaActual(memoria)
+MostrarMemoriaActual(memoria)"""
+
+memori=CrearMemoria()
+print(memori)
