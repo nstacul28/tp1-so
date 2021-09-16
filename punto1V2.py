@@ -44,3 +44,5 @@ MostrarMemoriaActual(memoria)"""
 
 memori=CrearMemoria()
 MostrarMemoriaActual(memori)
+memoriOrdenada= sorted(memori, key=lambda Tpart : Tpart["espacio"])
+MostrarMemoriaActual(memoriOrdenada)
