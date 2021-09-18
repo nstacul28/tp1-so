@@ -65,14 +65,16 @@ def Proceso(nombre,tamaño):
     a["tamaño"] = tamaño
     a["usado"] = False
     a["id"] = id(a)
+    a["idp"] = None
+    a["tamp"] = None
     return a
 
 def CrearProcesos():
     p=list()
-    p.append(Proceso("proceso 1",90))
-    p.append(Proceso("proceso 2",130))
-    p.append(Proceso("proceso 3",200))
-    p.append(Proceso("proceso 4",130))
+    p.append(Proceso("pro 1",200))
+    p.append(Proceso("pro 2",130))
+    p.append(Proceso("pro 3",90))
+    
     return p
 
 def IniciarSO(me):
@@ -81,10 +83,15 @@ def IniciarSO(me):
           RellenarParticion(me[i]["espacio"],0,"SO",len(me[i]["espacio"]))
 
 
-#ordenar los procesos de menor a mayor?
-
-
-
+#Nombre del proceso-----id de proceso-----id de inicio de la particion asignada-----tamaño de la particon asignada
+def MostrarTabla(pro):
+    print("-------------------------------------------------------------------------------")
+    print("-----------------------**********   TABLA  **********--------------------------")
+    print("-------------------------------------------------------------------------------")
+    print("|  N. del Proceso  |  id proceso  | id Ini. de la Part Asig. | tamaño de Part |")
+    for n in range(len(pro)):
+        print("|    ",pro[n]["nombre"],"    |   ",pro[n]["id"],"    |       ",pro[n]["idp"],"   |   ",pro[n]["tamp"],"  |")
+    print("-------------------------------------------------------------------------------")
 
 
 
@@ -96,26 +103,20 @@ memori=CrearMemoria()
 memori= sorted(memori, key=lambda Tpart : Tpart["espacio"])
 IniciarSO(memori)
 MostrarMemoriaActual(memori)
-"""MostrarMemoriaActual(memori)
-RellenarParticion(memori[0]["espacio"],20,"p1",30)
-MostrarMemoriaActual(memori)
-print(memori[0]["espacio"])
-print(MaximoLugarDisponible(memori[0]["espacio"]))"""
 procesos=CrearProcesos()
-print(procesos)
-print(MaximoLugarDisponible(memori[1]["espacio"]))
 
+#Advertencia--> codigo denso...
 for i in range(len(procesos)):
-    #while not procesos[i]["usado"]:
     for j in range(len(memori)):
-        print(j)
         if procesos[i]["tamaño"]<=MaximoLugarDisponible(memori[j]["espacio"])[0]:
-            print("puse ",procesos[i]["nombre"])
             RellenarParticion(memori[j]["espacio"],MaximoLugarDisponible(memori[j]["espacio"])[1],procesos[i]["nombre"],procesos[i]["tamaño"])
+            procesos[i]["idp"]=MaximoLugarDisponible(memori[j]["espacio"])[1]
+            procesos[i]["tamp"]=len(memori[j]["espacio"])
             procesos[i]["usado"]=True
             break            
     if not procesos[i]["usado"]:
         print("El proceso debe esperar")
+#fin de codigo denso
 
-print(procesos)
 MostrarMemoriaActual(memori)
+MostrarTabla(procesos)
